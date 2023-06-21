@@ -201,7 +201,7 @@ class DecodeService : Service() {
 		// Create notification default intent.
 		val intent = Intent(applicationContext, MainActivity::class.java)
 		intent.flags = Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP
-		contentPendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+		contentPendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 		startForeground(NOTIF_ID, buildNotification())
 	}
 
@@ -234,7 +234,7 @@ class DecodeService : Service() {
 	private fun getCancelDecodePendingIntent(context: Context): PendingIntent {
 		val intent = Intent(context, StopDecodeReceiver::class.java)
 		intent.action = ACTION_CANCEL_DECODE
-		return PendingIntent.getBroadcast(context, 15, intent, 0)
+		return PendingIntent.getBroadcast(context, 15, intent, PendingIntent.FLAG_IMMUTABLE)
 	}
 
 	@RequiresApi(Build.VERSION_CODES.O)
